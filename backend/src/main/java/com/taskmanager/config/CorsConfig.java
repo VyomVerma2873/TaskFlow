@@ -18,12 +18,19 @@ public class CorsConfig {
         config.setAllowedOrigins(List.of(
                 "http://localhost:5173",
                 "http://localhost:3000",
-                "https://*.vercel.app"
+                "https://taskflow.vercel.app",
+                "https://task-flow.vercel.app",
+                "https://taskflow-git-main.vercel.app"
         ));
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-Requested-With"));
         config.setAllowCredentials(true);
         config.setMaxAge(3600L);
+
+        // Allow all Vercel preview deployments
+        config.setAllowedOriginPatterns(List.of(
+                "https://*.vercel.app"
+        ));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
