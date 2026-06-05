@@ -7,6 +7,10 @@
     {
       "source": "/api/:path*",
       "destination": "https://taskflow-api.onrender.com/api/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }

@@ -32,7 +32,13 @@ export default function RegisterPage() {
       await register(username, email, password);
       navigate('/');
     } catch (err) {
-      setError(err.response?.data?.message || 'Registration failed. Please try again.');
+      if (err.code === 'ECONNABORTED' || err.message?.includes('timeout')) {
+        setError('Server is taking too long to respond. The backend may be starting up — please try again in a minute.');
+      } else if (!err.response) {
+        setError('Cannot connect to server. Please check your internet connection and try again.');
+      } else {
+        setError(err.response?.data?.message || 'Registration failed. Please try again.');
+      }
     } finally {
       setLoading(false);
     }
