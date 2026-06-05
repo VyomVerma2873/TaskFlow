@@ -3,10 +3,13 @@ spring:
     name: task-manager-backend
 
   datasource:
-    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/taskmanager}
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/taskmanager?sslmode=require}
     username: ${DATABASE_USERNAME:postgres}
     password: ${DATABASE_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      connection-timeout: 30000
 
   jpa:
     hibernate:
